@@ -11,6 +11,7 @@ koniec = None
 opened = []
 closed = []
 debug = True
+monsters = []
 
 # Colors
 canvas_bg = "white"

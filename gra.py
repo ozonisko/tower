@@ -15,14 +15,13 @@ def click(event):
         c.mapa[i].update(tower_type)
         print("clicked at field:", c.mapa[i].x, c.mapa[i].y)
 
+
 # TWORZENIE TLA
 C = create_canvas(field)
 pil_bg = Image.open('bg.png')
 bg_image = ImageTk.PhotoImage(pil_bg)
 cbg = C.create_image(c.szerokosc//2,c.wysokosc//2, image=bg_image)
 c.mapa = create_blocks(C)
-for i in c.mapa:
-    print(i.x, i.y, i.image)
 
 
 
@@ -36,6 +35,7 @@ Lb1.grid(row=0, column=0, sticky='w')
 C.pack()
 C.bind("<Button-1>", click)
 
-m1 = Monster(0,5, C)
+m1 = Monster(c.start.x,c.start.y, C)
+c.monsters = [m1]
 
 top.mainloop()
