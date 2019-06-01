@@ -4,6 +4,8 @@ from mapa import *
 from monster import *
 from PIL import Image, ImageTk
 
+from CannonTower import CannonTower
+
 top = Tk()
 field = Frame(top)
 menu = Frame(top)
@@ -14,6 +16,7 @@ def click(event):
         tower_type = Lb1.curselection()[0]
         c.mapa[i].update(tower_type)
         print("clicked at field:", c.mapa[i].x, c.mapa[i].y)
+        c.towers.append(CannonTower(i, C))
 
 
 # TWORZENIE TLA

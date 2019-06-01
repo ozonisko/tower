@@ -12,6 +12,7 @@ opened = []
 closed = []
 debug = True
 monsters = []
+towers = []
 
 # Colors
 canvas_bg = "white"
@@ -25,3 +26,6 @@ current_color = "khaki"
 closed_color = "burlywood3"
 startend_color = "navy"
 path_color = "red"
+
+#pieniazki do kupowania wiezy
+gold = 50
