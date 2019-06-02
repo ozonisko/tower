@@ -8,9 +8,6 @@ class TowerInterface:
     def findTarget(self):
         raise NotImplementedError
 
-    id = int() # numerek pola na mapie
-    damage = int() # obrażenia wieżu
-    cost = int() # koszt zbudowania
-    range = int() # zasieg ataku
-    C = None
+    def kill(self):
+        raise NotImplementedError
 

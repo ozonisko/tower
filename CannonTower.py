@@ -2,14 +2,11 @@ from TowerInterface import TowerInterface
 from CannonProjectile import CannonProjectile
 import config as c
 import utilities as u
-import os
-
-file = "file.mp3"
-os.system("mpg123 " + file)
 
 class CannonTower(TowerInterface):
     def __init__(self, id, C=None):
         print("CannonTower created with ID: %i" % id)
+        self.alive = True
         self.id = id
         self.x = self.__getX()
         self.y = self.__getY()
@@ -26,8 +23,9 @@ class CannonTower(TowerInterface):
         target = self.findTarget()
         if target is not None:
             CannonProjectile(self.damage, self.range, self.id, self.projectileStepInterval, target, C=self.C)
-        self.C.after(self.attackInterval, self.attack)
 
+        if self.alive:
+            self.C.after(self.attackInterval, self.attack)
 
     def findTarget(self):
         target = None
@@ -50,6 +48,9 @@ class CannonTower(TowerInterface):
 
         return target
 
+    def kill(self):
+        self.alive = False
+        del self
 
     def __getX(self):
         return c.mapa[self.id].x

@@ -10,13 +10,28 @@ top = Tk()
 field = Frame(top)
 menu = Frame(top)
 
+def findTower(id):
+    for tower in c.towers:
+        if tower.id == id:
+            return tower
+
+def removeTower(id):
+    tower = findTower(id)
+    tower.kill()
+    c.towers.remove(tower)
+    print("Removed tower%i" % id)
+
 def click(event):
     i = (event.x // c.kratka) + (event.y // c.kratka) * c.skala
     if i < c.szerokosc/c.kratka * c.wysokosc/c.kratka:
         tower_type = Lb1.curselection()[0]
         c.mapa[i].update(tower_type)
         print("clicked at field:", c.mapa[i].x, c.mapa[i].y)
-        c.towers.append(CannonTower(i, C=C))
+
+        if tower_type == 0:
+            removeTower(i)
+        else:
+            c.towers.append(CannonTower(i, C=C))
 
 
 # TWORZENIE TLA
