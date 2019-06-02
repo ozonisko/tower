@@ -16,7 +16,7 @@ def click(event):
         tower_type = Lb1.curselection()[0]
         c.mapa[i].update(tower_type)
         print("clicked at field:", c.mapa[i].x, c.mapa[i].y)
-        c.towers.append(CannonTower(i, C))
+        c.towers.append(CannonTower(i, C=C))
 
 
 # TWORZENIE TLA

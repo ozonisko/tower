@@ -16,6 +16,7 @@ class Monster():
         self.queue = []
         self.hp = 1
         self.pos = self.y * c.skala + self.x
+        self.gold = 10
 
         # wspolrzedne na Canvas
         self.xx = self.x * c.kratka + c.kratka // 2
