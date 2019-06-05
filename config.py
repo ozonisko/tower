@@ -15,6 +15,8 @@ monsters = []
 towers = []
 waves = []
 
+HP = 5
+
 # Colors
 canvas_bg = "white"
 # empty fill=transparent

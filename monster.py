@@ -47,6 +47,8 @@ class Monster():
         if self.droga: direction = self.droga.pop(0)
         else:
             print("-1 lives")
+            c.HP -= 1
+            print("Monster reached destination. Player HP is", c.HP)
             self.kill()
             return
 
