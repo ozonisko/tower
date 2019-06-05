@@ -23,6 +23,7 @@ class CannonProjectile(ProjectileInterface):
         self.route = self.prepareRoute()
 
         self.step()
+        self.target.hp -= self.damage
         #self.C.after(self.stepInterval, self.step)
 
     def step(self):

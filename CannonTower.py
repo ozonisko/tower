@@ -50,6 +50,7 @@ class CannonTower(TowerInterface):
 
     def kill(self):
         self.alive = False
+        c.towers.remove(self)
         del self
 
     def __getX(self):

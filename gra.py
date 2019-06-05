@@ -3,6 +3,7 @@ import config as c
 from mapa import *
 from monster import *
 from PIL import Image, ImageTk
+from Wave import *
 
 from CannonTower import CannonTower
 
@@ -18,7 +19,6 @@ def findTower(id):
 def removeTower(id):
     tower = findTower(id)
     tower.kill()
-    c.towers.remove(tower)
     print("Removed tower%i" % id)
 
 def click(event):
@@ -53,7 +53,10 @@ Lb1.grid(row=0, column=0, sticky='w')
 C.pack()
 C.bind("<Button-1>", click)
 
-m1 = Monster(c.start.x,c.start.y, C)
-c.monsters = [m1]
+#m1 = Monster(c.start.x,c.start.y, C)
+#c.monsters = [m1]
+
+wave1 = Wave(5, 5000, C)
+
 
 top.mainloop()

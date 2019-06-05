@@ -13,6 +13,7 @@ closed = []
 debug = True
 monsters = []
 towers = []
+waves = []
 
 # Colors
 canvas_bg = "white"

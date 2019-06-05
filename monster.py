@@ -14,9 +14,12 @@ class Monster():
         self.y = y
         self.droga = []
         self.queue = []
-        self.hp = 1
+        self.hp = 5
         self.pos = self.y * c.skala + self.x
         self.gold = 10
+        self.stepInterval = 700
+
+        self.alive = True
 
         # wspolrzedne na Canvas
         self.xx = self.x * c.kratka + c.kratka // 2
@@ -35,12 +38,23 @@ class Monster():
         self.find_way()
         self.step()
 
+    def kill(self):
+        self.alive = False
+        c.monsters.remove(self)
+        del self
+
     def step(self):
         if self.droga: direction = self.droga.pop(0)
         else:
             print("-1 lives")
-            del self
+            self.kill()
             return
+
+        if self.hp < 0:
+            print("Killed by tower")
+            self.kill()
+            return
+
         if direction == [1,0]:
             self.x += 1
             self.master.itemconfig(self.image, image=self.monster1r_image)
@@ -57,7 +71,9 @@ class Monster():
         self.yy = self.y * c.kratka + c.kratka // 2
         self.pos = self.y * c.skala + self.x
         self.update_image()
-        self.master.after(400, self.step)
+
+        if self.alive:
+            self.master.after(self.stepInterval, self.step)
 
     def update_image(self):
         self.master.coords(self.image, self.xx, self.yy)
