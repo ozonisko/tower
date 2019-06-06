@@ -56,7 +56,7 @@ C.bind("<Button-1>", click)
 #m1 = Monster(c.start.x,c.start.y, C)
 #c.monsters = [m1]
 
-wave1 = Wave(5, 5000, C)
+wave1 = Wave(40, 2000, C)
 
 
 top.mainloop()

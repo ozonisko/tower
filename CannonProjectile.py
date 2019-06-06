@@ -10,7 +10,7 @@ class CannonProjectile(ProjectileInterface):
         self.towerId = towerId
         self.stepInterval = stepInterval
         self.target = target
-        self.routeStep = 15
+        self.routeStep = 20
         self.C = C
         self.image_base = ImageTk.PhotoImage(u.RBGAImage("CannonTower_projectile.png"))
 

@@ -10,7 +10,7 @@ def create_canvas(field):
                   width=c.szerokosc,
                   bd=0)
 
-def create_blocks(C):
+def create_blocks(C=None):
     for i in range(c.wysokosc // c.kratka):
         for j in range(c.skala):
             c.mapa.append(Point(j, i, C))

@@ -2,6 +2,11 @@ from TowerInterface import TowerInterface
 from CannonProjectile import CannonProjectile
 import config as c
 import utilities as u
+import math
+from PIL import Image, ImageTk
+
+def RBGAImage(path):
+    return Image.open(path).convert("RGBA")
 
 class CannonTower(TowerInterface):
     def __init__(self, id, C=None):
@@ -10,18 +15,33 @@ class CannonTower(TowerInterface):
         self.id = id
         self.x = self.__getX()
         self.y = self.__getY()
-        self.range = 7
+        # wspolrzedne na Canvas
+        self.xx = self.x * c.kratka + c.kratka // 2
+        self.yy = self.y * c.kratka + c.kratka // 2
+        self.range = 6
         self.attackInterval = 1500
         self.projectileStepInterval = 50
-        self.damage = 2
+        self.damage = 0
         self.cost = 25
         self.C = C
+        self.pos = self.y * c.skala + self.x
+        self.master = C
+        self.tower1_image = ImageTk.PhotoImage(RBGAImage('t1.png'))
+        self.image = self.master.create_image(self.xx, self.yy, image=self.tower1_image)
 
         self.attack()
+
+    def rotate_image(self, angle):
+        self.tower1_image = ImageTk.PhotoImage(RBGAImage('t1.png').rotate(angle))
+        self.image = self.master.create_image(self.xx, self.yy, image=self.tower1_image)
+
 
     def attack(self):
         target = self.findTarget()
         if target is not None:
+            angle = abs(math.atan2(target.y - self.y, target.x - self.x) * 180 /math.pi)
+            print(angle)
+            self.rotate_image(angle)
             CannonProjectile(self.damage, self.range, self.id, self.projectileStepInterval, target, C=self.C)
 
         if self.alive:
@@ -50,6 +70,7 @@ class CannonTower(TowerInterface):
 
     def kill(self):
         self.alive = False
+        del self.image
         c.towers.remove(self)
         del self
 
