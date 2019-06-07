@@ -14,6 +14,7 @@ debug = True
 monsters = []
 towers = []
 waves = []
+slowDurations = []
 
 HP = 5
 

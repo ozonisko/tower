@@ -19,6 +19,8 @@ class Monster():
         self.pos = self.y * c.skala + self.x
         self.gold = 10
         self.stepInterval = 700
+        self.speedModifier = 1.0
+        self.slowDuration = 0
         self.opened = []
         self.closed = []
         self.start = None
@@ -80,9 +82,14 @@ class Monster():
         self.yy = self.y * c.kratka + c.kratka // 2
         self.pos = self.y * c.skala + self.x
         self.update_image()
-
+        
+        if self.slowDuration > 0:
+            self.slowDuration -= 1
+        else:
+            self.speedModifier = 1.0
+        
         if self.alive:
-            self.master.after(self.stepInterval, self.step)
+            self.master.after(int(self.stepInterval * self.speedModifier), self.step)
 
     def update_image(self):
         self.master.coords(self.image, self.xx, self.yy)

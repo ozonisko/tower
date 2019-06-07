@@ -6,10 +6,12 @@ from PIL import Image, ImageTk
 from Wave import *
 
 from CannonTower import CannonTower
+from IcyTower import IcyTower
 
 top = Tk()
 field = Frame(top)
 menu = Frame(top)
+   
 
 def findTower(id):
     for tower in c.towers:
@@ -31,7 +33,7 @@ def click(event):
         if tower_type == 0:
             removeTower(i)
         else:
-            c.towers.append(CannonTower(i, C=C))
+            c.towers.append(IcyTower(i, C=C))
 
 
 # TWORZENIE TLA
@@ -56,7 +58,7 @@ C.bind("<Button-1>", click)
 #m1 = Monster(c.start.x,c.start.y, C)
 #c.monsters = [m1]
 
-wave1 = Wave(40, 2000, C)
+wave1 = Wave(40, 1000, C)
 
 
 top.mainloop()
