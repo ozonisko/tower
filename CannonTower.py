@@ -39,7 +39,7 @@ class CannonTower(TowerInterface):
     def attack(self):
         target = self.findTarget()
         if target is not None:
-            angle = abs(math.atan2(target.y - self.y, target.x - self.x) * 180 /math.pi)
+            angle = -math.atan2(target.y - self.y, target.x - self.x) * 180 /math.pi
             print(angle)
             self.rotate_image(angle)
             CannonProjectile(self.damage, self.range, self.id, self.projectileStepInterval, target, C=self.C)
