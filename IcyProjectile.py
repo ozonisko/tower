@@ -15,7 +15,7 @@ class IcyProjectile(ProjectileInterface):
         self.slowTime = slowTime
         self.routeStep = 20
         self.C = C
-        self.image_base = ImageTk.PhotoImage(u.RBGAImage("CannonTower_projectile.png"))
+        self.image_base = ImageTk.PhotoImage(u.RGBAImage("CannonTower_projectile.png"))
 
         self.x = self.__getX()
         self.y = self.__getY()
@@ -37,6 +37,7 @@ class IcyProjectile(ProjectileInterface):
             distance = u.calculateDistance(monster.x, monster.y, self.endPointX, self.endPointY)
             if distance <= self.aoeSize:
                 monster.hp -= self.damage
+                monster.setImagesSlowed()
                 self.__slowEffect(monster)
                 
     def step(self):

@@ -12,7 +12,7 @@ class CannonProjectile(ProjectileInterface):
         self.target = target
         self.routeStep = 20
         self.C = C
-        self.image_base = ImageTk.PhotoImage(u.RBGAImage("CannonTower_projectile.png"))
+        self.image_base = ImageTk.PhotoImage(u.RGBAImage("CannonTower_projectile.png"))
 
         self.x = self.__getX()
         self.y = self.__getY()

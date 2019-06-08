@@ -5,9 +5,6 @@ import utilities as u
 import math
 from PIL import Image, ImageTk
 
-def RBGAImage(path):
-    return Image.open(path).convert("RGBA")
-
 class CannonTower(TowerInterface):
     def __init__(self, id, C=None):
         print("CannonTower created with ID: %i" % id)
@@ -26,13 +23,14 @@ class CannonTower(TowerInterface):
         self.C = C
         self.pos = self.y * c.skala + self.x
         self.master = C
-        self.tower1_image = ImageTk.PhotoImage(RBGAImage('t1.png'))
+
+        self.tower1_image = u.RGBAImageTk(u.RGBAImage('t1.png'))
         self.image = self.master.create_image(self.xx, self.yy, image=self.tower1_image)
 
         self.attack()
 
     def rotate_image(self, angle):
-        self.tower1_image = ImageTk.PhotoImage(RBGAImage('t1.png').rotate(angle))
+        self.tower1_image = ImageTk.PhotoImage(u.RGBAImage('t1.png').rotate(angle))
         self.image = self.master.create_image(self.xx, self.yy, image=self.tower1_image)
 
 

@@ -1,5 +1,6 @@
 
 import config as c
+import utilities as u
 from mapa import create_blocks
 from PIL import Image, ImageTk
 import copy
@@ -38,13 +39,38 @@ class Monster():
         #self.image = self.master.create_rectangle(self.x * c.kratka, self.y * c.kratka, (self.x + 1) * c.kratka, (self.y + 1) * c.kratka,
         #                           fill="red",
         #                           width=c.block_outline_width)
-        self.monster1r_image = ImageTk.PhotoImage(RBGAImage('m1r.png'))
-        self.monster1d_image = ImageTk.PhotoImage(RBGAImage('m1d.png'))
-        self.monster1l_image = ImageTk.PhotoImage(RBGAImage('m1l.png'))
-        self.monster1u_image = ImageTk.PhotoImage(RBGAImage('m1u.png'))
+        self.monster1r_image_base = u.RGBAImageTk(u.RGBAImage('m1r.png'))
+        self.monster1d_image_base = u.RGBAImageTk(u.RGBAImage('m1d.png'))
+        self.monster1l_image_base = u.RGBAImageTk(u.RGBAImage('m1l.png'))
+        self.monster1u_image_base = u.RGBAImageTk(u.RGBAImage('m1u.png'))
+
+        self.monster1r_image_slowed = u.RGBAImageTk(u.createCircle(u.RGBAImage('m1r.png')))
+        self.monster1d_image_slowed = u.RGBAImageTk(u.createCircle(u.RGBAImage('m1d.png')))
+        self.monster1l_image_slowed = u.RGBAImageTk(u.createCircle(u.RGBAImage('m1l.png')))
+        self.monster1u_image_slowed = u.RGBAImageTk(u.createCircle(u.RGBAImage('m1u.png')))
+
+        self.monster1r_image = self.monster1r_image_base
+        self.monster1d_image = self.monster1d_image_base
+        self.monster1l_image = self.monster1l_image_base
+        self.monster1u_image = self.monster1u_image_base
+
         self.image = self.master.create_image(self.xx, self.yy, image=self.monster1r_image)
         self.find_way()
         self.step()
+
+    def setImagesSlowed(self):
+        if self.monster1r_image == self.monster1r_image_base:
+            self.monster1r_image = self.monster1r_image_slowed
+            self.monster1d_image = self.monster1d_image_slowed
+            self.monster1l_image = self.monster1l_image_slowed
+            self.monster1u_image = self.monster1u_image_slowed
+
+    def setImagesBase(self):
+        if self.monster1r_image == self.monster1r_image_slowed:
+            self.monster1r_image = self.monster1r_image_base
+            self.monster1d_image = self.monster1d_image_base
+            self.monster1l_image = self.monster1l_image_base
+            self.monster1u_image = self.monster1u_image_base
 
     def kill(self):
         self.alive = False
@@ -87,6 +113,7 @@ class Monster():
             self.slowDuration -= 1
         else:
             self.speedModifier = 1.0
+            self.setImagesBase()
         
         if self.alive:
             self.master.after(int(self.stepInterval * self.speedModifier), self.step)
