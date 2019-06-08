@@ -15,7 +15,7 @@ class IcyProjectile(ProjectileInterface):
         self.slowTime = slowTime
         self.routeStep = 20
         self.C = C
-        self.image_base = ImageTk.PhotoImage(u.RGBAImage("CannonTower_projectile.png"))
+        self.image_base = ImageTk.PhotoImage(u.RGBAImage("IcyTower_projectile.PNG"))
 
         self.x = self.__getX()
         self.y = self.__getY()

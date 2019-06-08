@@ -26,13 +26,13 @@ class IcyTower(TowerInterface):
         self.C = C
         self.pos = self.y * c.skala + self.x
         self.master = C
-        self.tower1_image = u.RGBAImageTk(u.RGBAImage('t1.png'))
+        self.tower1_image = u.RGBAImageTk(u.RGBAImage('t2.png'))
         self.image = self.master.create_image(self.xx, self.yy, image=self.tower1_image)
 
         self.attack()
 
     def rotate_image(self, angle):
-        self.tower1_image = u.RGBAImageTk(u.RGBAImage('t1.png').rotate(angle))
+        self.tower1_image = u.RGBAImageTk(u.RGBAImage('t2.png').rotate(angle))
         self.image = self.master.create_image(self.xx, self.yy, image=self.tower1_image)
 
 
