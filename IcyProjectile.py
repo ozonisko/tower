@@ -24,7 +24,6 @@ class IcyProjectile(ProjectileInterface):
 
         self.image = self.C.create_image(self.xx, self.yy, image=self.image_base)
         self.route = self.prepareRoute()
-        print("ROUTE", self.route)
 
         self.step()
         
