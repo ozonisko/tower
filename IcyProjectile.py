@@ -24,9 +24,9 @@ class IcyProjectile(ProjectileInterface):
 
         self.image = self.C.create_image(self.xx, self.yy, image=self.image_base)
         self.route = self.prepareRoute()
+        print("ROUTE", self.route)
 
         self.step()
-        self.target.hp -= self.damage
         
     def __slowEffect(self, target):
         target.speedModifier = 1.0 + self.slow
