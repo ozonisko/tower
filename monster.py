@@ -93,21 +93,18 @@ class Monster():
             return
 
         if direction == [1,0]:
-            self.x += 1
             self.master.itemconfig(self.image, image=self.monster1r_image)
         elif direction == [0,-1]:
-            self.y -= 1
             self.master.itemconfig(self.image, image=self.monster1u_image)
         elif direction == [-1,0]:
-            self.x -= 1
             self.master.itemconfig(self.image, image=self.monster1l_image)
         elif direction == [0,1]:
-            self.y += 1
             self.master.itemconfig(self.image, image=self.monster1d_image)
-        self.xx = self.x * c.kratka + c.kratka // 2
-        self.yy = self.y * c.kratka + c.kratka // 2
+
+        self.x += direction[0]
+        self.y += direction[1]
         self.pos = self.y * c.skala + self.x
-        self.update_image()
+        self.animate_step(3, direction)
         
         if self.slowDuration > 0:
             self.slowDuration -= 1
@@ -117,6 +114,13 @@ class Monster():
         
         if self.alive:
             self.master.after(int(self.stepInterval * self.speedModifier), self.step)
+
+    def animate_step(self, steps_count, direction):
+        if steps_count >= 0:
+            self.xx = (self.x - steps_count*direction[0]/4) * c.kratka + c.kratka // 2
+            self.yy = (self.y - steps_count*direction[1]/4) * c.kratka + c.kratka // 2
+            self.update_image()
+            self.master.after(int(self.stepInterval * self.speedModifier/4), self.animate_step, steps_count-1, direction)
 
     def update_image(self):
         self.master.coords(self.image, self.xx, self.yy)
