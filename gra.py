@@ -9,6 +9,7 @@ from CannonTower import CannonTower
 from IcyTower import IcyTower
 
 top = Tk()
+c.top = top
 field = Frame(top)
 
 menu = Frame(top)

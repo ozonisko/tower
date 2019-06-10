@@ -3,6 +3,7 @@ import config as c
 import utilities as u
 from mapa import create_blocks
 from PIL import Image, ImageTk
+from tkinter import messagebox
 import copy
 
 def RBGAImage(path):
@@ -90,6 +91,10 @@ class Monster():
     def update_stats(self):
         self.stats_C.itemconfig(c.stats_label_life, text=c.HP)
         self.stats_C.itemconfig(c.stats_label_cash, text=c.GOLD)
+        if c.HP == 0:
+            messagebox.showinfo("Title", "Game Over. Score {}".format(c.wave))
+            c.top.destroy()
+            
 
     def step(self):
         if self.droga: direction = self.droga.pop(0)
@@ -97,7 +102,6 @@ class Monster():
             print("-1 lives")
             c.HP -= 1
             self.update_stats()
-
             print("Monster reached destination. Player HP is", c.HP)
             self.kill()
             return
