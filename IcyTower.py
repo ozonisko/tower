@@ -16,8 +16,8 @@ class IcyTower(TowerInterface):
         self.xx = u.convertToCanvasCoord(self.x)
         self.yy = u.convertToCanvasCoord(self.y)
         self.range = 5
-        self.attackInterval = 1000
-        self.projectileStepInterval = 50
+        self.attackInterval = 2000
+        self.projectileStepInterval = 100
         self.damage = 1
         self.cost = 100
         self.slow = 2.0 #percentage

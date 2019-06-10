@@ -55,8 +55,10 @@ class Monster():
         self.monster1l_image = self.monster1l_image_base
         self.monster1u_image = self.monster1u_image_base
 
-        self.image_current = u.RGBAImageTk(self.monster1r_image)
-        self.image = self.master.create_image(self.xx, self.yy, image=self.image_current)
+        self.image_current = self.monster1r_image
+        self.image_current_tk = u.RGBAImageTk(self.image_current)
+
+        self.image = self.master.create_image(self.xx, self.yy, image=self.image_current_tk)
         self.find_way()
         self.step()
 
@@ -74,6 +76,10 @@ class Monster():
             self.monster1l_image = self.monster1l_image_base
             self.monster1u_image = self.monster1u_image_base
 
+    def updateHealthBar(self):
+        self.image_current_tk = u.RGBAImageTk(u.drawProgressBarOver(self.image_current, self.hp, self.MAX_HP))
+        self.master.itemconfig(self.image, image=self.image_current_tk)
+
     def kill(self):
         self.alive = False
         c.monsters.remove(self)
@@ -90,22 +96,28 @@ class Monster():
             return
 
         if self.hp < 0:
+            self.image_current = u.RGBAImageTk(u.RGBAImage("blood.png"))
+            self.master.itemconfig(self.image, image=self.image_current)
+            self.master.after(100, self.kill)
             print("Killed by tower")
-            self.kill()
             return
 
         if direction == [1,0]:
-            self.image_current = u.RGBAImageTk(u.drawProgressBarOver(self.monster1r_image, self.hp, self.MAX_HP))
-            self.master.itemconfig(self.image, image=self.image_current)
+            self.image_current = self.monster1r_image
+            self.image_current_tk = u.RGBAImageTk(u.drawProgressBarOver(self.image_current, self.hp, self.MAX_HP))
+            self.master.itemconfig(self.image, image=self.image_current_tk)
         elif direction == [0,-1]:
-            self.image_current = u.RGBAImageTk(u.drawProgressBarOver(self.monster1u_image, self.hp, self.MAX_HP))
-            self.master.itemconfig(self.image, image=self.image_current)
+            self.image_current = self.monster1u_image
+            self.image_current_tk = u.RGBAImageTk(u.drawProgressBarOver(self.image_current, self.hp, self.MAX_HP))
+            self.master.itemconfig(self.image, image=self.image_current_tk)
         elif direction == [-1,0]:
-            self.image_current = u.RGBAImageTk(u.drawProgressBarOver(self.monster1l_image, self.hp, self.MAX_HP))
-            self.master.itemconfig(self.image, image=self.image_current)
+            self.image_current = self.monster1l_image
+            self.image_current_tk = u.RGBAImageTk(u.drawProgressBarOver(self.image_current, self.hp, self.MAX_HP))
+            self.master.itemconfig(self.image, image=self.image_current_tk)
         elif direction == [0,1]:
-            self.image_current = u.RGBAImageTk(u.drawProgressBarOver(self.monster1d_image, self.hp, self.MAX_HP))
-            self.master.itemconfig(self.image, image=self.image_current)
+            self.image_current = self.monster1d_image
+            self.image_current_tk = u.RGBAImageTk(u.drawProgressBarOver(self.image_current, self.hp, self.MAX_HP))
+            self.master.itemconfig(self.image, image=self.image_current_tk)
 
         self.x += direction[0]
         self.y += direction[1]

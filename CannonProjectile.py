@@ -28,6 +28,7 @@ class CannonProjectile(ProjectileInterface):
     def step(self):
         if len(self.route) == 0:
             self.target.hp -= self.damage
+            self.target.updateHealthBar()
             del self.target
             del self
             return

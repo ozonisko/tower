@@ -42,6 +42,7 @@ class IcyProjectile(ProjectileInterface):
     def step(self):
         if len(self.route) == 0:
             self.__dealDamage()
+            self.target.updateHealthBar()
             del self.target
             del self
             return
