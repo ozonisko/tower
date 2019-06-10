@@ -18,8 +18,8 @@ class CannonTower(TowerInterface):
         self.range = 6
         self.attackInterval = 1500
         self.projectileStepInterval = 50
-        self.damage = 0
-        self.cost = 50
+        self.damage = 3
+        self.cost = c.cannon_tower_cost
         self.C = C
         self.pos = self.y * c.skala + self.x
         self.master = C

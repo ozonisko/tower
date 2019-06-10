@@ -17,8 +17,10 @@ waves = []
 slowDurations = []
 
 HP = 5
-GOLD = 0
+GOLD = 400
 
+cannon_tower_cost = 50
+icy_tower_cost = 70
 
 # common stats
 stats_label_life = None
