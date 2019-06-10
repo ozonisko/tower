@@ -18,8 +18,8 @@ class IcyTower(TowerInterface):
         self.range = 5
         self.attackInterval = 1000
         self.projectileStepInterval = 50
-        self.damage = 0
-        self.cost = 25
+        self.damage = 1
+        self.cost = 100
         self.slow = 2.0 #percentage
         self.slowTime = 5 #number of steps
         self.aoeSize = 2

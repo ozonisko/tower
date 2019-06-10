@@ -16,7 +16,8 @@ class Monster():
         self.y = y
         self.droga = []
         self.queue = []
-        self.hp = 5
+        self.MAX_HP = 10
+        self.hp = self.MAX_HP
         self.pos = self.y * c.skala + self.x
         self.gold = 10
         self.stepInterval = 700
@@ -39,22 +40,23 @@ class Monster():
         #self.image = self.master.create_rectangle(self.x * c.kratka, self.y * c.kratka, (self.x + 1) * c.kratka, (self.y + 1) * c.kratka,
         #                           fill="red",
         #                           width=c.block_outline_width)
-        self.monster1r_image_base = u.RGBAImageTk(u.RGBAImage('m1r.png'))
-        self.monster1d_image_base = u.RGBAImageTk(u.RGBAImage('m1d.png'))
-        self.monster1l_image_base = u.RGBAImageTk(u.RGBAImage('m1l.png'))
-        self.monster1u_image_base = u.RGBAImageTk(u.RGBAImage('m1u.png'))
+        self.monster1r_image_base = u.RGBAImage('m1r.png')
+        self.monster1d_image_base = u.RGBAImage('m1d.png')
+        self.monster1l_image_base = u.RGBAImage('m1l.png')
+        self.monster1u_image_base = u.RGBAImage('m1u.png')
 
-        self.monster1r_image_slowed = u.RGBAImageTk(u.createCircle(u.RGBAImage('m1r.png')))
-        self.monster1d_image_slowed = u.RGBAImageTk(u.createCircle(u.RGBAImage('m1d.png')))
-        self.monster1l_image_slowed = u.RGBAImageTk(u.createCircle(u.RGBAImage('m1l.png')))
-        self.monster1u_image_slowed = u.RGBAImageTk(u.createCircle(u.RGBAImage('m1u.png')))
+        self.monster1r_image_slowed = u.createCircle(u.RGBAImage('m1r.png'))
+        self.monster1d_image_slowed = u.createCircle(u.RGBAImage('m1d.png'))
+        self.monster1l_image_slowed = u.createCircle(u.RGBAImage('m1l.png'))
+        self.monster1u_image_slowed = u.createCircle(u.RGBAImage('m1u.png'))
 
         self.monster1r_image = self.monster1r_image_base
         self.monster1d_image = self.monster1d_image_base
         self.monster1l_image = self.monster1l_image_base
         self.monster1u_image = self.monster1u_image_base
 
-        self.image = self.master.create_image(self.xx, self.yy, image=self.monster1r_image)
+        self.image_current = u.RGBAImageTk(self.monster1r_image)
+        self.image = self.master.create_image(self.xx, self.yy, image=self.image_current)
         self.find_way()
         self.step()
 
@@ -93,13 +95,17 @@ class Monster():
             return
 
         if direction == [1,0]:
-            self.master.itemconfig(self.image, image=self.monster1r_image)
+            self.image_current = u.RGBAImageTk(u.drawProgressBarOver(self.monster1r_image, self.hp, self.MAX_HP))
+            self.master.itemconfig(self.image, image=self.image_current)
         elif direction == [0,-1]:
-            self.master.itemconfig(self.image, image=self.monster1u_image)
+            self.image_current = u.RGBAImageTk(u.drawProgressBarOver(self.monster1u_image, self.hp, self.MAX_HP))
+            self.master.itemconfig(self.image, image=self.image_current)
         elif direction == [-1,0]:
-            self.master.itemconfig(self.image, image=self.monster1l_image)
+            self.image_current = u.RGBAImageTk(u.drawProgressBarOver(self.monster1l_image, self.hp, self.MAX_HP))
+            self.master.itemconfig(self.image, image=self.image_current)
         elif direction == [0,1]:
-            self.master.itemconfig(self.image, image=self.monster1d_image)
+            self.image_current = u.RGBAImageTk(u.drawProgressBarOver(self.monster1d_image, self.hp, self.MAX_HP))
+            self.master.itemconfig(self.image, image=self.image_current)
 
         self.x += direction[0]
         self.y += direction[1]

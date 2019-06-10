@@ -1,6 +1,6 @@
 import config as c
 import math
-from PIL import Image, ImageTk, ImageDraw
+from PIL import Image, ImageTk, ImageDraw, ImageFont
 from numpy import ones, vstack
 from numpy.linalg import lstsq
 
@@ -59,3 +59,21 @@ def generateValuesInBetween(start, stop, step):
         values = values[::-1]
 
     return values
+
+def drawProgressBarOver(image, value, maxValue):
+    barHeight = 3
+    extensionHeight = barHeight + 2
+
+    imageCopy = image.copy()
+    w, h = image.size
+    newImage = Image.new("RGBA", (w, h + extensionHeight))
+    newImage.paste(imageCopy, (0, extensionHeight))
+    draw = ImageDraw.Draw(newImage)
+
+    draw.rectangle(((0, 0), (w, barHeight)), fill="green")
+
+    valueToMaxRatio = (maxValue - value) / maxValue
+    if valueToMaxRatio > 0:
+        draw.rectangle(((w - int(w*valueToMaxRatio), 0), (w, barHeight)), fill="red")
+
+    return newImage
