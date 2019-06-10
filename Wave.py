@@ -1,10 +1,11 @@
 from monster import *
 
 class Wave:
-    def __init__(self, size, interval, C):
+    def __init__(self, size, interval, C, stats_C):
         self.size = size
         self.interval = interval
         self.C = C
+        self.stats_C = stats_C
 
         self.createWave()
 
@@ -15,4 +16,4 @@ class Wave:
             self.C.after(self.interval, self.createWave)
 
     def createMonster(self):
-        c.monsters.append(Monster(c.start.x,c.start.y, self.C))
+        c.monsters.append(Monster(c.start.x,c.start.y, self.C, self.stats_C))

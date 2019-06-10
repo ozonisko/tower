@@ -9,8 +9,9 @@ def RBGAImage(path):
     return Image.open(path).convert("RGBA")
 
 class Monster():
-    def __init__(self, x, y, C=None):
+    def __init__(self, x, y, C=None, stats_C=None):
         self.master = C
+        self.stats_C = stats_C
         # potrzebne do A*
         self.x = x
         self.y = y
@@ -86,11 +87,17 @@ class Monster():
         print(c.monsters)
         del self
 
+    def update_stats(self):
+        self.stats_C.itemconfig(c.stats_label_life, text=c.HP)
+        self.stats_C.itemconfig(c.stats_label_cash, text=c.GOLD)
+
     def step(self):
         if self.droga: direction = self.droga.pop(0)
         else:
             print("-1 lives")
             c.HP -= 1
+            self.update_stats()
+
             print("Monster reached destination. Player HP is", c.HP)
             self.kill()
             return
@@ -100,6 +107,8 @@ class Monster():
             self.image_current_tk = u.RGBAImageTk(self.image_current)
             self.master.itemconfig(self.image, image=self.image_current_tk)
             self.master.after(100, self.kill)
+            c.GOLD += self.gold
+            self.update_stats()
             print("Killed by tower")
             return
 

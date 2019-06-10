@@ -1,4 +1,4 @@
-wysokosc, szerokosc = 600, 1000
+wysokosc, szerokosc = 450, 600
 kratka = 50
 skala = szerokosc // kratka
 label = []
@@ -17,6 +17,13 @@ waves = []
 slowDurations = []
 
 HP = 5
+GOLD = 0
+
+
+# common stats
+stats_label_life = None
+stats_label_cash = None
+stats_label_wave = None
 
 # Colors
 canvas_bg = "white"
