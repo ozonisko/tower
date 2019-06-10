@@ -96,8 +96,9 @@ class Monster():
             return
 
         if self.hp < 0:
-            self.image_current = u.RGBAImageTk(u.RGBAImage("blood.png"))
-            self.master.itemconfig(self.image, image=self.image_current)
+            self.image_current = u.RGBAImage("blood.png")
+            self.image_current_tk = u.RGBAImageTk(self.image_current)
+            self.master.itemconfig(self.image, image=self.image_current_tk)
             self.master.after(100, self.kill)
             print("Killed by tower")
             return
