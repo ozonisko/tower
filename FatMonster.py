@@ -23,7 +23,7 @@ class FatMonster(Monster):
         self.hp = self.MAX_HP
         self.pos = self.y * c.skala + self.x
         self.gold = 30
-        self.stepInterval = 1500
+        self.stepInterval = 1600
         self.speedModifier = 1.0
         self.slowDuration = 0
         self.explosionRange = 1
@@ -44,15 +44,15 @@ class FatMonster(Monster):
         #self.image = self.master.create_rectangle(self.x * c.kratka, self.y * c.kratka, (self.x + 1) * c.kratka, (self.y + 1) * c.kratka,
         #                           fill="red",
         #                           width=c.block_outline_width)
-        self.monster1r_image_base = u.RGBAImage('m1r.png')
-        self.monster1d_image_base = u.RGBAImage('m1d_2.png')
-        self.monster1l_image_base = u.RGBAImage('m1l_2.png')
-        self.monster1u_image_base = u.RGBAImage('m1u_2.png')
+        self.monster1r_image_base = u.RGBAImage('m2r.png')
+        self.monster1d_image_base = u.RGBAImage('m2d.png')
+        self.monster1l_image_base = u.RGBAImage('m2l.png')
+        self.monster1u_image_base = u.RGBAImage('m2u.png')
 
-        self.monster1r_image_slowed = u.createCircle(u.RGBAImage('m1r_2.png'))
-        self.monster1d_image_slowed = u.createCircle(u.RGBAImage('m1d_2.png'))
-        self.monster1l_image_slowed = u.createCircle(u.RGBAImage('m1l_2.png'))
-        self.monster1u_image_slowed = u.createCircle(u.RGBAImage('m1u_2.png'))
+        self.monster1r_image_slowed = u.createCircle(u.RGBAImage('m2r.png'))
+        self.monster1d_image_slowed = u.createCircle(u.RGBAImage('m2d.png'))
+        self.monster1l_image_slowed = u.createCircle(u.RGBAImage('m2l.png'))
+        self.monster1u_image_slowed = u.createCircle(u.RGBAImage('m2u.png'))
 
         self.monster1r_image = self.monster1r_image_base
         self.monster1d_image = self.monster1d_image_base
@@ -72,17 +72,19 @@ class FatMonster(Monster):
             distance = u.calculateDistance(self.x, self.y, tower.x, tower.y)
             if distance <= self.explosionRange:
                 neighbors.append(tower)
-        
+
         return neighbors
     
     def kamikaze(self, towers):
+
         for tower in towers:
             fieldId = u.findFieldByCoordinates(tower.x, tower.y)
             c.mapa[fieldId].update(0)
             tower.kill()
-        
-        c.monsters.append(Monster(c.start.x, c.start.y, self.master, self.stats_C))
-        self.kill()
+
+        c.monsters.append(Monster(self.x, self.y, self.master, self.stats_C))
+        self.master.after(100, self.kill)
+        return
 
     def step(self):
         if self.droga: direction = self.droga.pop(0)
@@ -125,11 +127,12 @@ class FatMonster(Monster):
         self.y += direction[1]
         self.pos = self.y * c.skala + self.x
         self.animate_step(3, direction)
-        
+
+
         towersToBeDestroyed = self.findNeighborTowers()
         if len(towersToBeDestroyed) > 0:
             self.kamikaze(towersToBeDestroyed)
-        
+
         if self.slowDuration > 0:
             self.slowDuration -= 1
         else:

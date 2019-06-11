@@ -87,6 +87,7 @@ class Monster():
         c.monsters.remove(self)
         print(c.monsters)
         del self
+        return
 
     def update_stats(self):
         self.stats_C.itemconfig(c.stats_label_life, text=c.HP)

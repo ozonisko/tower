@@ -67,6 +67,8 @@ class CannonTower(TowerInterface):
         return target
 
     def kill(self):
+        self.tower1_image = u.RGBAImageTk(u.RGBAImage("explosion.png"))
+        self.master.itemconfig(self.image, image=self.tower1_image)
         self.alive = False
         del self.image
         c.towers.remove(self)

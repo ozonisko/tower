@@ -96,7 +96,7 @@ Lb1.pack()
 C.pack()
 C.bind("<Button-1>", click)
 
-wave1 = Wave(40, 2000, C, stats_C)
+wave1 = Wave(1, 2000, C, stats_C)
 
 
 top.mainloop()
