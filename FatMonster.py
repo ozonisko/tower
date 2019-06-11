@@ -82,9 +82,8 @@ class FatMonster(Monster):
             c.mapa[fieldId].update(0)
             tower.kill()
 
-        c.monsters.append(Monster(self.x, self.y, self.master, self.stats_C))
+        #c.monsters.append(Monster(self.x, self.y, self.master, self.stats_C))
         self.master.after(100, self.kill)
-        return
 
     def step(self):
         if self.droga: direction = self.droga.pop(0)
@@ -138,7 +137,7 @@ class FatMonster(Monster):
         else:
             self.speedModifier = 1.0
             self.setImagesBase()
-        
+
         if self.alive:
             self.master.after(int(self.stepInterval * self.speedModifier), self.step)
             
