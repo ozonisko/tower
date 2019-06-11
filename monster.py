@@ -107,7 +107,7 @@ class Monster():
             self.kill()
             return
 
-        if self.hp < 0:
+        if self.hp <= 0:
             self.image_current = u.RGBAImage("blood.png")
             self.image_current_tk = u.RGBAImageTk(self.image_current)
             self.master.itemconfig(self.image, image=self.image_current_tk)

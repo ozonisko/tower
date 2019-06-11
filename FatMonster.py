@@ -33,6 +33,7 @@ class FatMonster(Monster):
         self.koniec = None
         self.local_map = create_blocks()
 
+        self.exploded = False
         self.alive = True
 
         # wspolrzedne na Canvas
@@ -76,14 +77,14 @@ class FatMonster(Monster):
         return neighbors
     
     def kamikaze(self, towers):
-
         for tower in towers:
             fieldId = u.findFieldByCoordinates(tower.x, tower.y)
             c.mapa[fieldId].update(0)
             tower.kill()
 
+        self.exploded = True
+        self.hp = 0
         c.monsters.append(Monster(self.x, self.y, self.master, self.stats_C))
-        self.master.after(100, self.kill)
 
     def step(self):
         if self.droga: direction = self.droga.pop(0)
@@ -95,12 +96,20 @@ class FatMonster(Monster):
             self.kill()
             return
 
-        if self.hp < 0:
-            self.image_current = u.RGBAImage("blood.png")
+        towersToBeDestroyed = self.findNeighborTowers()
+        if len(towersToBeDestroyed) > 0:
+            self.kamikaze(towersToBeDestroyed)
+
+        if self.hp <= 0:
+            if not self.exploded:
+                c.GOLD += self.gold
+                self.image_current = u.RGBAImage("blood.png")
+            else:
+                self.image_current = u.RGBAImage("explosion.png")
+
             self.image_current_tk = u.RGBAImageTk(self.image_current)
             self.master.itemconfig(self.image, image=self.image_current_tk)
             self.master.after(100, self.kill)
-            c.GOLD += self.gold
             self.update_stats()
             print("Killed by tower")
             return
@@ -126,11 +135,6 @@ class FatMonster(Monster):
         self.y += direction[1]
         self.pos = self.y * c.skala + self.x
         self.animate_step(3, direction)
-
-
-        towersToBeDestroyed = self.findNeighborTowers()
-        if len(towersToBeDestroyed) > 0:
-            self.kamikaze(towersToBeDestroyed)
 
         if self.slowDuration > 0:
             self.slowDuration -= 1
