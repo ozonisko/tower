@@ -70,12 +70,13 @@ class IcyTower(TowerInterface):
         return target
 
     def kill(self):
-        self.tower1_image = u.RGBAImageTk(u.RGBAImage("explosion.png"))
-        self.master.itemconfig(self.image, image=self.tower1_image)
-        self.alive = False
-        del self.image
-        c.towers.remove(self)
-        del self
+        if self.alive:
+            self.tower1_image = u.RGBAImageTk(u.RGBAImage("explosion.png"))
+            self.master.itemconfig(self.image, image=self.tower1_image)
+            self.alive = False
+            del self.image
+            c.towers.remove(self)
+            del self
 
     def __getX(self):
         return c.mapa[self.id].x

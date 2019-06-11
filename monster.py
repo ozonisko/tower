@@ -83,10 +83,11 @@ class Monster():
         self.master.itemconfig(self.image, image=self.image_current_tk)
 
     def kill(self):
-        self.alive = False
-        c.monsters.remove(self)
-        print(c.monsters)
-        del self
+        if self.alive:
+            self.alive = False
+            c.monsters.remove(self)
+            print(c.monsters)
+            del self
 
     def update_stats(self):
         self.stats_C.itemconfig(c.stats_label_life, text=c.HP)
