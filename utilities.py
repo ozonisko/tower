@@ -77,3 +77,10 @@ def drawProgressBarOver(image, value, maxValue):
         draw.rectangle(((w - int(w*valueToMaxRatio), 0), (w, barHeight)), fill="red")
 
     return newImage
+
+def findFieldByCoordinates(x, y):
+    size = len(c.mapa)
+    for i in range(size):
+        if c.mapa[i].x == x and c.mapa[i].y == y:
+            return i
+

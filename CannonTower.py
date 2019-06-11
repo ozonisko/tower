@@ -70,6 +70,7 @@ class CannonTower(TowerInterface):
         self.alive = False
         del self.image
         c.towers.remove(self)
+        print("CannonTower with ID: %i destroyed" % self.id)
         del self
 
     def __getX(self):

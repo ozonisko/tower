@@ -1,4 +1,5 @@
 from monster import *
+from FatMonster import *
 
 class Wave:
     def __init__(self, size, interval, C, stats_C):
@@ -16,4 +17,4 @@ class Wave:
             self.C.after(self.interval, self.createWave)
 
     def createMonster(self):
-        c.monsters.append(Monster(c.start.x,c.start.y, self.C, self.stats_C))
+        c.monsters.append(FatMonster(c.start.x,c.start.y, self.C, self.stats_C))
