@@ -20,7 +20,6 @@ class Wave:
     def createMonster(self):
         r = random.randint(0,100)
         if r > 80:
-            c.monsters.append(FatMonster(c.start.x,c.start.y+random.choice[-2,-1,0,1,2], self.C, self.stats_C))
+            c.monsters.append(FatMonster(c.start.x, c.start.y + random.randint(-2,2), self.C, self.stats_C))
         else:
-            #c.monsters.append(Monster(c.start.x, c.start.y + random.choice[-2, -1, 0, 1, 2], self.C, self.stats_C))
-            pass
+            c.monsters.append(Monster(c.start.x, c.start.y + random.randint(-2,2), self.C, self.stats_C))

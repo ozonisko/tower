@@ -107,8 +107,5 @@ C.bind("<Button-1>", click)
 top.bind("<space>", start_waves)
 
 
-#start_waves()
-
-
 
 top.mainloop()
