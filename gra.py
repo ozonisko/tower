@@ -58,6 +58,15 @@ def click(event):
 def update_stats():
     stats_C.itemconfig(c.stats_label_cash, text=c.GOLD)
 
+def start_waves(event=None):
+    print("Release the kraken!")
+    c.wave += 1
+    Wave(c.wave, 2000, C, stats_C)
+    # odpal pętle tylko za pierwszym razem
+    if not c.running_waves: C.after(10000, start_waves)
+    else: c.running_waves = True
+
+
 # TWORZENIE TLA
 C = create_canvas(field)
 pil_bg = Image.open('bg.png')
@@ -95,8 +104,11 @@ Lb1.insert(0, "Sell tower - 50% net worth")
 Lb1.pack()
 C.pack()
 C.bind("<Button-1>", click)
+top.bind("<space>", start_waves)
 
-wave1 = Wave(1, 2000, C, stats_C)
+
+#start_waves()
+
 
 
 top.mainloop()

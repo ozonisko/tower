@@ -18,7 +18,7 @@ slowDurations = []
 
 HP = 5
 GOLD = 400
-wave = 1
+wave = 0
 
 cannon_tower_cost = 50
 icy_tower_cost = 70
@@ -28,6 +28,8 @@ stats_label_life = None
 stats_label_cash = None
 stats_label_wave = None
 top = None
+running_waves = False
+
 
 # Colors
 canvas_bg = "white"

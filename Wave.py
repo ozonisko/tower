@@ -1,5 +1,6 @@
 from monster import *
 from FatMonster import *
+import random
 
 class Wave:
     def __init__(self, size, interval, C, stats_C):
@@ -17,4 +18,9 @@ class Wave:
             self.C.after(self.interval, self.createWave)
 
     def createMonster(self):
-        c.monsters.append(FatMonster(c.start.x,c.start.y, self.C, self.stats_C))
+        r = random.randint(0,100)
+        if r > 80:
+            c.monsters.append(FatMonster(c.start.x,c.start.y+random.choice[-2,-1,0,1,2], self.C, self.stats_C))
+        else:
+            #c.monsters.append(Monster(c.start.x, c.start.y + random.choice[-2, -1, 0, 1, 2], self.C, self.stats_C))
+            pass
